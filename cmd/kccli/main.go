@@ -3,13 +3,14 @@ package main
 import (
 	"github.com/tendermint/tendermint/libs/cli"
 
-	app "github.com/cosmos/sdk-tutorials/kennychain"
-	"github.com/cosmos/sdk-tutorials/kennychain/starter"
+	app "github.com/cosmos/sdk-tutorials/hellochain"
+	"github.com/cosmos/sdk-tutorials/hellochain/starter"
+	"github.com/cosmos/sdk-tutorials/hellochain/x/greeter"
 )
 
 func main() {
 
-	starter.BuildModuleBasics()
+	starter.BuildModuleBasics(greeter.AppModuleBasic{})
 
 	rootCmd := starter.NewCLICommand()
 
@@ -21,7 +22,7 @@ func main() {
 	app.ModuleBasics.AddQueryCommands(queryCmd, starter.Cdc)
 	rootCmd.AddCommand(txCmd, queryCmd)
 
-	executor := cli.PrepareMainCmd(rootCmd, "HC", starter.DefaultCLIHome)
+	executor := cli.PrepareMainCmd(rootCmd, "KC", starter.DefaultCLIHome)
 	err := executor.Execute()
 	if err != nil {
 		panic(err)
